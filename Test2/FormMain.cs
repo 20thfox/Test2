@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop;
 
 namespace Test2
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private Word.Word.Application wordapp;
         private Word.Word.Document worddocument;
         private int NumOfProt = 0;
         private string SaveName;
+        private string SavePath;
         private bool GeneralFault = false;
 
         private Object trueObj = true;
         private Object falseObj = false;
         Object missingObj = System.Reflection.Missing.Value;
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
@@ -46,59 +40,65 @@ namespace Test2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            wordapp = new Word.Word.Application
-            { Visible = false };
+            if (SavePath == null) { MessageBox.Show("Введите место сохранения"); } 
+            else if (SavePath == "") { MessageBox.Show("Введите место сохранения"); }
+            else
+            {
+                wordapp = new Word.Word.Application
+                { Visible = false };
+                CheckedListBox.CheckedIndexCollection CheckedItems = checkedListBox1.CheckedIndices;
+                progressBar1.Maximum = CheckedItems.Count;
+                if (checkedListBox1.GetItemChecked(0) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Вторичная коммутация";
+                    GenVtorCom();
+                    progressBar1.Value++;
+                }
+                if (checkedListBox1.GetItemChecked(1) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Металлосвязь";
+                    GenGround();
+                    progressBar1.Value++;
+                }
+                if (checkedListBox1.GetItemChecked(2) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Электродвигатели";
+                    GenEngine();
+                    progressBar1.Value++;
+                }
+                if (checkedListBox1.GetItemChecked(3) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Параметрирование ПЛК";
+                    GenPLC();
+                    progressBar1.Value++;
+                }
+                if (checkedListBox1.GetItemChecked(4) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Кабельные линии";
+                    CabLine();
+                    progressBar1.Value++;
+                }
+                if (checkedListBox1.GetItemChecked(5) == true)
+                {
+                    NumOfProt++;
+                    SaveName = "Испытание контрольных кабельных линий";
+                    CheckCabLine();
+                    progressBar1.Value++;
+                }
 
-            if (checkedListBox1.GetItemChecked(0) == true)
-            {
-                NumOfProt++;
-                SaveName = "Вторичная коммутация";
-                GenVtorCom();
-                progressBar1.Value++;
+                if (GeneralFault == false)
+                {
+                    wordapp.Quit(ref falseObj, ref missingObj, ref missingObj);
+                    NumOfProt = 0;
+                    MessageBox.Show("Завершено успешно");
+                    progressBar1.Value = 0;
+                }
             }
-            if(checkedListBox1.GetItemChecked(1) == true)
-            {
-                NumOfProt++;
-                SaveName = "Металлосвязь";
-                GenGround();
-                progressBar1.Value++;
-            }
-            if(checkedListBox1.GetItemChecked(2) == true)
-            {
-                NumOfProt++;
-                SaveName = "Электродвигатели";
-                GenEngine();
-                progressBar1.Value++;
-            }
-            if(checkedListBox1.GetItemChecked(3) == true)
-            {
-                NumOfProt++;
-                SaveName = "Параметрирование ПЛК";
-                GenPLC();
-                progressBar1.Value++;
-            }
-            if(checkedListBox1.GetItemChecked(4) == true)
-            {
-                NumOfProt++;
-                SaveName = "Кабельные линии";
-                CabLine();
-                progressBar1.Value++;
-            }
-            if(checkedListBox1.GetItemChecked(5) == true)
-            {
-                NumOfProt++;
-                SaveName = "Испытание контрольных кабельных линий";
-                CheckCabLine();
-                progressBar1.Value++;
-            }
-
-            if (GeneralFault == false)
-            {
-                wordapp.Quit(ref falseObj, ref missingObj, ref missingObj);
-                NumOfProt = 0;
-                MessageBox.Show("Завершено успешно");
-            }
-
         }
 
         private void GenVtorCom()
@@ -121,7 +121,7 @@ namespace Test2
             }
             catch (Exception)
             {
-                wordapp.Quit(ref falseObj, ref missingObj,ref missingObj);
+                wordapp.Quit(ref falseObj, ref missingObj, ref missingObj);
                 worddocument = null;
                 wordapp = null;
                 genFaultActive();
@@ -157,7 +157,8 @@ namespace Test2
             }
 
         }
-        private void GenPLC() {
+        private void GenPLC()
+        {
             try
             {
                 Object template = @"C:\Users\Twent\Desktop\Templates\PLC.docx";
@@ -185,7 +186,8 @@ namespace Test2
             }
 
         }
-        private void GenGround() {
+        private void GenGround()
+        {
             try
             {
                 Object template = @"C:\Users\Twent\Desktop\Templates\Ground.docx";
@@ -212,7 +214,8 @@ namespace Test2
                 genFaultActive();
             }
         }
-        private void GenEngine() {
+        private void GenEngine()
+        {
             try
             {
                 Object template = @"C:\Users\Twent\Desktop\Templates\Engine.docx";
@@ -239,7 +242,8 @@ namespace Test2
                 genFaultActive();
             }
         }
-        private void CheckCabLine() {
+        private void CheckCabLine()
+        {
             try
             {
                 Object template = @"C:\Users\Twent\Desktop\Templates\CheckCabLine.docx";
@@ -282,7 +286,7 @@ namespace Test2
             //Замента номера протокола, температуры, давления и влаги
             //тут будет чтото с FIND или нет
             findText = "п00-0-0-0000";
-            replaceText = textBox3.Text + "-" + NumOfProt;
+            replaceText = textBox3.Text + "-" + NumOfProt + "-2020";
             wordapp.Selection.Find.Execute(ref findText, ReplaceWith: ref replaceText);
             wordapp.Selection.Collapse(0);
             findText = "@Temp";
@@ -318,6 +322,7 @@ namespace Test2
             lastTable.Cell(3, 2).Range.InsertAfter(comboBox2.Text);
             lastTable.Cell(1, 4).Range.InsertAfter("/ " + textBox7.Text + " /");
             lastTable.Cell(3, 4).Range.InsertAfter("/ " + textBox8.Text + " /");
+            lastTable.Cell(6, 2).Range.InsertAfter(comboBox15.Text);
             lastTable.Cell(6, 4).Range.InsertAfter("/ " + textBox9.Text + " /");
             lastTable.Cell(5, 2).Range.InsertAfter(textBox10.Text);
             lastTable.Cell(7, 2).Range.InsertAfter(textBox11.Text);
@@ -325,9 +330,9 @@ namespace Test2
         }
         private void Save()
         {
-            
+
             //здесь будет сохранение
-            Object fileName = @"C:\Users\Twent\Desktop\TEST2\" + textBox3.Text + "-" + NumOfProt + " " + SaveName + ".docx";
+            Object fileName = SavePath + @"\" + textBox3.Text + "-" + NumOfProt + "-2020" + " " + SaveName + ".docx";
             Object fileFormat = Word.Word.WdSaveFormat.wdFormatDocumentDefault;
             worddocument.SaveAs2(ref fileName, ref fileFormat);
             worddocument.Close(ref falseObj, ref missingObj, ref missingObj);
@@ -343,6 +348,12 @@ namespace Test2
         {
             GeneralFault = true;
             MessageBox.Show("Чтото пошло не так");
+        }
+
+        private void SavePL_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            SavePath = folderBrowserDialog1.SelectedPath;
         }
     }
 }
