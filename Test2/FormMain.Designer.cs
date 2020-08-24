@@ -1,5 +1,8 @@
-﻿namespace Test2
+﻿using System;
+
+namespace Test2
 {
+    
     partial class FormMain
     {
         /// <summary>
@@ -28,9 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("sdfsdf");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Контрольные кабели", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,18 +106,30 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMark = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.контрольныеКабелиBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsaDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsaDataSet = new Test2.dsaDataSet();
+            this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.контрольные_кабелиTableAdapter = new Test2.dsaDataSetTableAdapters.Контрольные_кабелиTableAdapter();
             this.menuStrip1.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.контрольныеКабелиBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsaDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsaDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -125,7 +138,7 @@
             this.открытьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(850, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1118, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -158,7 +171,7 @@
             this.Tabs.Location = new System.Drawing.Point(12, 27);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(826, 411);
+            this.Tabs.Size = new System.Drawing.Size(1094, 411);
             this.Tabs.TabIndex = 1;
             // 
             // tabPage1
@@ -197,14 +210,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(818, 385);
+            this.tabPage1.Size = new System.Drawing.Size(1086, 385);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Главная";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // SavePl
             // 
-            this.SavePl.Location = new System.Drawing.Point(665, 310);
+            this.SavePl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SavePl.Location = new System.Drawing.Point(933, 310);
             this.SavePl.Name = "SavePl";
             this.SavePl.Size = new System.Drawing.Size(147, 23);
             this.SavePl.TabIndex = 30;
@@ -226,7 +240,7 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(469, 356);
+            this.progressBar1.Location = new System.Drawing.Point(728, 356);
             this.progressBar1.Maximum = 6;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(190, 23);
@@ -244,7 +258,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(665, 356);
+            this.button1.Location = new System.Drawing.Point(933, 356);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 23);
             this.button1.TabIndex = 27;
@@ -472,7 +486,7 @@
             "Параметрировани ПЛК",
             "Испытание кабельных линий",
             "Испытание контрольных кабельных линий"});
-            this.checkedListBox1.Location = new System.Drawing.Point(520, 6);
+            this.checkedListBox1.Location = new System.Drawing.Point(788, 6);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(292, 94);
             this.checkedListBox1.TabIndex = 0;
@@ -515,7 +529,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(818, 385);
+            this.tabPage2.Size = new System.Drawing.Size(1086, 385);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Вторичная коммутация";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -795,7 +809,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(818, 385);
+            this.tabPage3.Size = new System.Drawing.Size(1086, 385);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Металлосвязь";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -805,7 +819,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(818, 385);
+            this.tabPage4.Size = new System.Drawing.Size(1086, 385);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Электродвигатели";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -815,68 +829,121 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(818, 385);
+            this.tabPage5.Size = new System.Drawing.Size(1086, 385);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Параметрирование ПЛК";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.splitContainer1);
+            this.tabPage6.Controls.Add(this.statusStrip1);
+            this.tabPage6.Controls.Add(this.dataGridView1);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(818, 385);
+            this.tabPage6.Size = new System.Drawing.Size(1086, 385);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Кабельные линии";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // splitContainer1
+            // statusStrip1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 360);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1080, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // splitContainer1.Panel2
+            // toolStripStatusLabel1
             // 
-            this.splitContainer1.Panel2.CausesValidation = false;
-            this.splitContainer1.Panel2.Controls.Add(this.treeView1);
-            this.splitContainer1.Size = new System.Drawing.Size(812, 379);
-            this.splitContainer1.SplitterDistance = 466;
-            this.splitContainer1.TabIndex = 0;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(66, 17);
+            this.toolStripStatusLabel1.Text = "Состояние";
             // 
-            // treeView1
+            // dataGridView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode9.Name = "Узел1";
-            treeNode9.Text = "sdfsdf";
-            treeNode10.Name = "ControlCab";
-            treeNode10.Text = "Контрольные кабели";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            this.treeView1.Size = new System.Drawing.Size(186, 343);
-            this.treeView1.TabIndex = 0;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnNum,
+            this.ColumnName,
+            this.ColumnMark,
+            this.ColumnSize,
+            this.ColumnLong});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1080, 300);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // ColumnNum
+            // 
+            this.ColumnNum.Frozen = true;
+            this.ColumnNum.HeaderText = "№";
+            this.ColumnNum.Name = "ColumnNum";
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Присоединение";
+            this.ColumnName.Name = "ColumnName";
+            // 
+            // ColumnMark
+            // 
+            this.ColumnMark.DataSource = this.контрольныеКабелиBindingSource;
+            this.ColumnMark.DisplayMember = "Марка";
+            this.ColumnMark.HeaderText = "Марка";
+            this.ColumnMark.Name = "ColumnMark";
+            // 
+            // контрольныеКабелиBindingSource
+            // 
+            this.контрольныеКабелиBindingSource.DataMember = "Контрольные кабели";
+            this.контрольныеКабелиBindingSource.DataSource = this.dsaDataSetBindingSource;
+            // 
+            // dsaDataSetBindingSource
+            // 
+            this.dsaDataSetBindingSource.DataSource = this.dsaDataSet;
+            this.dsaDataSetBindingSource.Position = 0;
+            // 
+            // dsaDataSet
+            // 
+            this.dsaDataSet.DataSetName = "dsaDataSet";
+            this.dsaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // ColumnSize
+            // 
+            this.ColumnSize.HeaderText = "Сечение х Число жил";
+            this.ColumnSize.Name = "ColumnSize";
+            // 
+            // ColumnLong
+            // 
+            this.ColumnLong.HeaderText = "Длина";
+            this.ColumnLong.Name = "ColumnLong";
             // 
             // tabPage7
             // 
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(818, 385);
+            this.tabPage7.Size = new System.Drawing.Size(1086, 385);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Испытание контр каб линий";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // контрольные_кабелиTableAdapter
+            // 
+            this.контрольные_кабелиTableAdapter.ClearBeforeFill = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 450);
+            this.ClientSize = new System.Drawing.Size(1118, 450);
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "Генератор протоколов V0.1";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.Tabs.ResumeLayout(false);
@@ -885,9 +952,13 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.контрольныеКабелиBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsaDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsaDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -969,10 +1040,20 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ComboBox comboBox15;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button SavePl;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private dsaDataSet dsaDataSet;
+        private System.Windows.Forms.BindingSource dsaDataSetBindingSource;
+        private System.Windows.Forms.BindingSource контрольныеКабелиBindingSource;
+        private dsaDataSetTableAdapters.Контрольные_кабелиTableAdapter контрольные_кабелиTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ColumnMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLong;
     }
 }
 

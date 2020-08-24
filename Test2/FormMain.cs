@@ -8,6 +8,7 @@ namespace Test2
     {
         private Word.Word.Application wordapp;
         private Word.Word.Document worddocument;
+        
         private int NumOfProt = 0;
         private string SaveName;
         private string SavePath;
@@ -15,11 +16,12 @@ namespace Test2
 
         private Object trueObj = true;
         private Object falseObj = false;
-        Object missingObj = System.Reflection.Missing.Value;
+        private Object missingObj = System.Reflection.Missing.Value;
+
+        
         public FormMain()
         {
             InitializeComponent();
-
         }
 
         /*private void файлToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,5 +357,14 @@ namespace Test2
             folderBrowserDialog1.ShowDialog();
             SavePath = folderBrowserDialog1.SelectedPath;
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dsaDataSet.Контрольные_кабели". При необходимости она может быть перемещена или удалена.
+            this.контрольные_кабелиTableAdapter.Fill(this.dsaDataSet.Контрольные_кабели);
+
+        }
+
+
     }
 }
